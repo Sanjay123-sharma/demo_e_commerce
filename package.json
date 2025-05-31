@@ -1,7 +1,7 @@
 {
   "name": "demo_e_commerce",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/cli": "^4.1.8",

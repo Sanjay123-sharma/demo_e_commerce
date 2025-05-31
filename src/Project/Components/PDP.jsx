@@ -1,27 +1,27 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router";
-import { addProduct } from "../Store/Slice";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useParams } from 'react-router'
+import { addProduct } from '../Store/Slice';
 
 export default function PDP() {
-  const { id } = useParams();
-  const ProductList = useSelector((state) => state.product.ProductList);
-  let Product = ProductList.find((item) => item.id.toString() === id);
-  const dispatch = useDispatch();
+    const {id}=useParams()
+    const ProductList=useSelector((state)=>state.product.ProductList);
+    let Product=ProductList.find((item)=>item.id.toString()===id);
+    const dispatch=useDispatch()
 
-  const Cart = useSelector((state) => state.product.Cart);
+        const Cart=useSelector((state)=>state.product.Cart)
 
-  const handleAdd = (id) => {
-    let res = Cart.find((item) => item.id === id);
-    if (res) {
-      alert("Item already Added");
-    } else {
-      dispatch(addProduct(id));
-    }
-  };
+        const handleAdd=(id)=>{
+            let res=Cart.find((item)=>item.id===id)
+                  if(res){
+                      alert("Item already Added")
+                  }else{
+                      dispatch(addProduct(id));
+                  }
+        }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+   <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
       <header className="fixed top-0 left-0 w-full bg-gray-800 text-white p-4 shadow z-10">
         <div className="container mx-auto flex justify-between items-center">
@@ -43,9 +43,7 @@ export default function PDP() {
       {/* Main Content */}
       <main className="flex-1 container mx-auto mt-24 px-4">
         {!Product ? (
-          <h1 className="text-red-600 text-xl text-center">
-            Product Not Found
-          </h1>
+          <h1 className="text-red-600 text-xl text-center">Product Not Found</h1>
         ) : (
           <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
@@ -71,12 +69,9 @@ export default function PDP() {
                 <p className="text-sm text-yellow-600 mb-2">
                   Rating: {Product.rating.rate} ({Product.rating.count} reviews)
                 </p>
-                <button
-                  className="bg-blue-600 text-white px-3 py-1 rounded 
+                <button className="bg-blue-600 text-white px-3 py-1 rounded 
              hover:bg-blue-700 active:bg-green-600 
-             active:scale-95 transition duration-150"
-                  onClick={() => handleAdd(Product.id)}
-                >
+             active:scale-95 transition duration-150" onClick={()=>handleAdd(Product.id)}>
                   Add to Cart
                 </button>
               </div>
@@ -87,11 +82,8 @@ export default function PDP() {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white text-center py-4 mt-8">
-        <p>
-          &copy; {new Date().getFullYear()} Made by Sanjay - All rights
-          reserved.
-        </p>
+        <p>&copy; {new Date().getFullYear()} Made by Sanjay - All rights reserved.</p>
       </footer>
     </div>
-  );
+  )
 }
