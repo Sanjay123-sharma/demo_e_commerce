@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 // action
 export const ApiData=createAsyncThunk('product',async()=>{
     let response=await axios.get('https://fakestoreapi.com/products');
@@ -45,11 +46,16 @@ export const Slice=createSlice({
         removeAllProducts:(state)=>{
             state.Cart=[]
         },
-        addOrder:(state)=>{
-            state.Order=[...state.Cart,...state.Order]
+        addOrder:(state)=>{   
+            const newOrders = state.Cart.map(item => ({
+    ...item, // ...state.Cart
+    orderId: uuidv4() // add a unique key for each order entry
+  }));     
+            state.Order=[...newOrders,...state.Order]
         },
         removeOrder:(state,action)=>{
-            state.Order=state.Order.filter((item)=>item.id!==action.payload)
+
+            state.Order=state.Order.filter((item)=>item.orderId!==action.payload)
         }
 
     },

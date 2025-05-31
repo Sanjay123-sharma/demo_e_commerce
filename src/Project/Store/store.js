@@ -7,7 +7,8 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
- 
+  version:2,
+  
 };
 const user=combineReducers({
     product:SliceReducer

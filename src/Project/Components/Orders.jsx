@@ -6,9 +6,10 @@ import { NavLink } from 'react-router';
 export default function Orders() {
     const Order=useSelector((state)=>state.product.Order);
     const dispatch=useDispatch()
-    const handleCancel=(id)=>{
-        dispatch(removeOrder(id))
+    const handleCancel=(orderId)=>{
+        dispatch(removeOrder(orderId))
         alert("Order Cancel Successfully")
+        console.log(orderId);
 
     }
 
@@ -33,9 +34,9 @@ export default function Orders() {
         ) : (
           <div className="space-y-4">
              <h1 className="text-2xl font-bold">Confirmed Orders</h1>
-            {Order.map((item) => (
+            {Order.map((item,index) => (
               <div
-                key={item.id}
+                key={index}
                 className="bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row sm:items-center justify-between"
               >
                 <div className="flex items-center space-x-4">
@@ -49,12 +50,12 @@ export default function Orders() {
                     <p className="text-sm text-gray-600">Rating: {item.rating}</p>
                     <p className="text-sm text-gray-600">Quantity: {item.count}</p>
                     <p className="text-green-600 font-bold">
-                     Total: ₹ {(item.count * item.price).toFixed(2)}
+                     Total:₹ {(item.count * item.price).toFixed(2)}
                     </p>
                   </div>
                 </div>
                 <button
-                  onClick={() => handleCancel(item.id)}
+                  onClick={() => handleCancel(item.orderId)}
                   className="mt-2 sm:mt-0 sm:ml-4 bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700"
                 >
                   Cancel
